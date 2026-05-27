@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardião da Lavoura Paranaense - Agrinho 2026</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="dark-theme">
+
+    <header class="main-header">
+        <div class="header-container">
+            <h1>Guardião da Lavoura</h1>
+            <div class="accessibility-controls">
+                <button id="btn-fonte-aumentar" class="btn-acc" aria-label="Aumentar Fonte">A+</button>
+                <button id="btn-fonte-diminuir" class="btn-acc" aria-label="Diminuir Fonte">A-</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="secao-identificacao" class="card-painel">
+            <h2>Identificação do Agrônomo</h2>
+            <label for="nome-usuario">Digite seu nome para iniciar o monitoramento:</label>
+            <div class="input-group">
+                <input type="text" id="nome-usuario" placeholder="Ex: Maria Silva">
+                <button id="btn-entrar">Iniciar Missão</button>
+            </div>
+            <p id="boas-vindas" class="texto-oculto"></p>
+        </section>
+
+        <section id="simulador-campo" class="card-painel">
+            <div class="painel-header">
+                <h2>Simulador MIP (Manejo Integrado de Pragas)</h2>
+                <div class="status-container">
+                    <span id="status-sustentabilidade">Sustentabilidade: 100 pts</span>
+                    <span id="status-financeiro">Orçamento: R$ 5000</span>
+                </div>
+            </div>
+
+            <div class="alerta-box">
+                <p id="texto-situacao"><strong>[ALERTA DRONE - CASCAVEL/PR]:</strong> O monitoramento detectou 3 lagartas por metro na lavoura de soja. Qual é a sua estratégia?</p>
+            </div>
+
+            <div class="botoes-decisao">
+                <button id="btn-opcao-a" class="btn-acao btn-perigo">Opção A: Pulverizar Químico Imediatamente</button>
+                <button id="btn-opcao-b" class="btn-acao btn-sucesso">Opção B: Aplicar Controle Biológico (MIP)</button>
+            </div>
+
+            <div id="feedback-resultado"></div>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
