@@ -1,92 +1,112 @@
-// Garantir execução segura após carregamento da página
-document.addEventListener("DOMContentLoaded", function() {
+// ==========================================
+// 1. MENU DE 3 PONTINHOS (Dropdown Seguro)
+// ==========================================
+const btnModulos = document.getElementById("btn-modulos");
+const dropdownModulos = document.getElementById("dropdown-modulos");
 
-    // ==========================================
-    // 1. SISTEMA SPA: MUDANÇA DE TEXTO EM BAIXO DO MENU
-    // ==========================================
-    window.mudarAba = function(idAlvo, evento) {
-        if(evento) evento.preventDefault(); // Evita salto de página ou recarregamento
+// Ao clicar no botão, ele adiciona ou remove a classe 'show'
+btnModulos.addEventListener("click", function(event) {
+    event.stopPropagation(); // Impede que o clique feche o menu imediatamente
+    dropdownModulos.classList.toggle("show");
+});
+
+// Fechar o menu se o usuário clicar em qualquer outro lugar da tela
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        if (dropdownModulos.classList.contains('show')) {
+            dropdownModulos.classList.remove('show');
+        }
+    }
+};
+
+// ==========================================
+// 2. ZOOM ACESSÍVEL (Alterando a fonte raiz)
+// ==========================================
+let tamanhoFonte = 16; 
+
+document.getElementById("btn-aumentar-zoom").addEventListener("click", function() {
+    if (tamanhoFonte < 26) { // Limite máximo
+        tamanhoFonte += 2;
+        document.documentElement.style.fontSize = tamanhoFonte + "px";
+    }
+});
+
+document.getElementById("btn-diminuir-zoom").addEventListener("click", function() {
+    if (tamanhoFonte > 12) { // Limite mínimo
+        tamanhoFonte -= 2;
+        document.documentElement.style.fontSize = tamanhoFonte + "px";
+    }
+});
+
+document.getElementById("btn-resetar-zoom").addEventListener("click", function() {
+    tamanhoFonte = 16;
+    document.documentElement.style.fontSize = tamanhoFonte + "px";
+});
+
+// ==========================================
+// 3. LEITOR DE VOZ (Lendo todo o conteúdo principal)
+// ==========================================
+let isLendo = false;
+const btnVoz = document.getElementById("btn-fala");
+const sintese = window.speechSynthesis;
+
+btnVoz.addEventListener("click", function() {
+    if (isLendo) {
+        sintese.cancel();
+        isLendo = false;
+        btnVoz.innerText = "🔊 Ouvir Site";
+        btnVoz.style.backgroundColor = "#2c3e50";
+    } else {
+        // Pega todo o texto de dentro da tag <main>
+        const textoSite = document.querySelector(".conteudo-principal").innerText;
+        const mensagem = new SpeechSynthesisUtterance(textoSite);
         
-        // Seleciona todas as seções de conteúdo do site
-        const todasSecoes = document.querySelectorAll('.secao-conteudo');
+        mensagem.lang = "pt-BR";
         
-        // Oculta absolutamente todas as seções
-        todasSecoes.forEach(function(secao) {
-            secao.classList.remove('ativa');
-            secao.classList.add('oculta');
-        });
-        
-        // Exibe apenas a seção alvo do clique
-        const secaoAlvo = document.getElementById(idAlvo);
-        if(secaoAlvo) {
-            secaoAlvo.classList.remove('oculta');
-            secaoAlvo.classList.add('ativa');
-        }
+        mensagem.onend = function() {
+            isLendo = false;
+            btnVoz.innerText = "🔊 Ouvir Site";
+            btnVoz.style.backgroundColor = "#2c3e50";
+        };
 
-        // Fecha o dropdown de 3 pontinhos automaticamente ao clicar
-        document.getElementById("dropdown-modulos").style.display = "none";
+        sintese.speak(mensagem);
+        isLendo = true;
+        btnVoz.innerText = "🛑 Parar Leitura";
+        btnVoz.style.backgroundColor = "#c0392b"; // Fica vermelho
+    }
+});
 
-        // Se a voz estiver ativa ao mudar de aba, desliga para não confundir o usuário
-        if (estaLendo) {
-            pararVoz();
-        }
-    };
+// ==========================================
+// 4. SIMULADOR DE CUSTOS
+// ==========================================
+document.getElementById("btn-calcular").addEventListener("click", function() {
+    const area = parseFloat(document.getElementById("campo-area").value);
+    const unidade = document.getElementById("campo-unidade").value;
+    const estrategia = document.getElementById("campo-estrategia").value;
+    const resultado = document.getElementById("painel-resultado-simulador");
 
-    // Função auxiliar para ligar/desligar o menu dos 3 pontinhos
-    window.toggleDropdown = function() {
-        const dropdown = document.getElementById("dropdown-modulos");
-        if(dropdown.style.display === "block") {
-            dropdown.style.display = "none";
-        } else {
-            dropdown.style.display = "block";
-        }
-    };
+    if (isNaN(area) || area <= 0) {
+        resultado.innerHTML = "<span style='color:red;'>Erro: Insira uma área válida.</span>";
+        return;
+    }
 
-    // Fecha o menu de 3 pontinhos se clicar fora dele
-    window.onclick = function(event) {
-        if (!event.target.matches('.botao-3pontinhos')) {
-            const dropdowns = document.getElementsByClassName("conteudo-dropdown");
-            for (let i = 0; i < dropdowns.length; i++) {
-                dropdowns[i].style.display = "none";
-            }
-        }
-    };
+    let multiplicador = 1; 
+    if (unidade === "metro") multiplicador = 0.05; 
+    if (unidade === "km") multiplicador = 100;    
+    if (unidade === "hectare") multiplicador = 1.5; 
 
+    let preco = (estrategia === "quimico") ? 380 : 190;
+    let total = area * preco * multiplicador;
 
-    // ==========================================
-    // 2. SISTEMA DE ZOOM DA PÁGINA INTEIRA CORRIGIDO
-    // ==========================================
-    let escalaZoomGlobal = 1.0;
+    let totalEmReais = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-    document.getElementById("btn-aumentar-zoom").addEventListener("click", function() {
-        if (escalaZoomGlobal < 1.5) {
-            escalaZoomGlobal += 0.1;
-            document.body.style.transform = `scale(${escalaZoomGlobal})`;
-            document.body.style.width = (100 / escalaZoomGlobal) + "%";
-        }
-    });
-
-    document.getElementById("btn-diminuir-zoom").addEventListener("click", function() {
-        if (escalaZoomGlobal > 0.7) {
-            escalaZoomGlobal -= 0.1;
-            document.body.style.transform = `scale(${escalaZoomGlobal})`;
-            document.body.style.width = (100 / escalaZoomGlobal) + "%";
-        }
-    });
-
-    document.getElementById("btn-resetar-zoom").addEventListener("click", function() {
-        escalaZoomGlobal = 1.0;
-        document.body.style.transform = `scale(1.0)`;
-        document.body.style.width = "100%";
-    });
-
-
-    // ==========================================
-    // 3. LEITOR DE TELA (VOZ) CORRIGIDO
-    // ==========================================
-    let estaLendo = false;
-    const btnVoz = document.getElementById("btn-fala");
-    const motorVoz = window.speechSynthesis;
-
-    btnVoz.addEventListener("click", function() {
-        if
+    if (estrategia === "quimico") {
+        resultado.style.backgroundColor = "#fadbd8";
+        resultado.style.color = "#78281f";
+        resultado.innerHTML = `Gasto estimado: <strong>${totalEmReais}</strong>.<br><small>O químico é caro. Com bioinsumos, você economizaria metade do valor!</small>`;
+    } else {
+        resultado.style.backgroundColor = "#d4efdf";
+        resultado.style.color = "#145a32";
+        resultado.innerHTML = `Gasto estimado: <strong>${totalEmReais}</strong>.<br><small>Excelente economia! E você ainda preserva as abelhas do Paraná.</small> `;
+    }
+});

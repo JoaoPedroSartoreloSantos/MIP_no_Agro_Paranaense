@@ -25,60 +25,76 @@
             <button id="btn-diminuir-zoom" class="btn-ctrl" title="Diminuir Zoom">-</button>
             <button id="btn-resetar-zoom" class="btn-ctrl" title="Ajustar para Padrão">🔍</button>
             <button id="btn-aumentar-zoom" class="btn-ctrl" title="Aumentar Zoom">+</button>
-            <button id="btn-fala" class="btn-ctrl btn-voz" title="Ler Informações">🔊 Ouvir Texto</button>
+            <button id="btn-fala" class="btn-ctrl btn-voz" title="Ler Informações">🔊 Ouvir Site</button>
         </div>
     </header>
 
     <nav class="barra-navegacao">
         
-        <div class="menu-dropdown-container">
-            <button class="botao-3pontinhos" onclick="toggleDropdown()">⋮ Módulos</button>
-            <div id="dropdown-modulos" class="conteudo-dropdown">
-                <a href="#" onclick="mudarAba('modulo-1', event)">Página 1: Perguntas, Proposta e Mapa</a>
-                <a href="#" onclick="mudarAba('modulo-2', event)">Página 2: Como Diminuir Agrotóxicos</a>
-                <a href="#" onclick="mudarAba('modulo-3', event)">Página 3: Simulador de Custos por Área</a>
-                <a href="#" onclick="mudarAba('modulo-4', event)">Página 4: Mini-Jogo (Futuro)</a>
+        <div class="dropdown">
+            <button class="dropbtn" id="btn-modulos">⋮ Módulos</button>
+            <div id="dropdown-modulos" class="dropdown-content">
+                <a href="#modulo-1">1. Proposta e Mapa</a>
+                <a href="#modulo-2">2. Como Diminuir Agrotóxicos</a>
+                <a href="#modulo-3">3. Simulador de Custos</a>
+                <a href="#modulo-4">4. Mini-Jogo (Futuro)</a>
             </div>
         </div>
         
         <ul class="links-menu">
-            <li><a href="#" onclick="mudarAba('menu-pergunta1', event)">Produtividade vs Intoxicação</a></li>
-            <li><a href="#" onclick="mudarAba('menu-pergunta2', event)">Químicos e Adubos Naturais</a></li>
-            <li><a href="#" onclick="mudarAba('menu-pergunta3', event)">Identificar e Salvar Pragas</a></li>
-            <li><a href="#" onclick="mudarAba('menu-mapa-pr', event)">Mapa do Paraná</a></li>
+            <li><a href="#pergunta1">Produtividade vs Intoxicação</a></li>
+            <li><a href="#pergunta2">Químicos e Adubos Naturais</a></li>
+            <li><a href="#pergunta3">Identificar e Salvar Pragas</a></li>
+            <li><a href="#mapa-pr">Mapa do Paraná</a></li>
         </ul>
     </nav>
 
     <main class="conteudo-principal">
         
-        <section id="modulo-1" class="secao-conteudo ativa">
-            <h2>Página 1: Visão Geral do Projeto</h2>
-            <div class="valores-box">
-                <h3>Nossa Proposta e Valores</h3>
-                <p>Este site foi desenvolvido para o Agrinho 2026 com o objetivo de conectar a tecnologia moderna do campo com a preservação ambiental do Paraná, mostrando que o equilíbrio gera fartura.</p>
-            </div>
-            <h3>Notícias do Campo Paranaense</h3>
-            <p>Produtores de Cascavel e Maringá batem recordes utilizando drones de monitoramento e manejo biológico para salvar plantações inteiras sem desperdício de recursos.</p>
-            <div class="galeria-fotos">
-                <div class="foto-card">Foto de Trator em Funcionamento</div>
-                <div class="foto-card">Foto de Plantação Saudável</div>
-            </div>
+        <section id="modulo-1">
+            <h2>Nossa Proposta - Agrinho 2026</h2>
+            <p>Este site foi desenvolvido para conectar a tecnologia moderna do campo com a preservação ambiental do Paraná, mostrando que o equilíbrio gera fartura.</p>
         </section>
 
-        <section id="modulo-2" class="secao-conteudo oculta">
-            <h2>Página 2: Como Reduzir Agrotóxicos e Aumentar a Produção</h2>
-            <p>Para reduzir a dependência de defensivos pesados na lavoura e garantir alimentos cada vez mais limpos, o produtor deve seguir o protocolo do MIP (Manejo Integrado de Pragas):</p>
+        <hr class="linha-divisoria">
+
+        <section id="pergunta1">
+            <h2>Como o controle de pragas ajuda a aumentar a produtividade e porque é tão importante mesmo "intoxicando" a comida?</h2>
+            <p>Quando insetos ou lagartas atacam uma lavoura, as plantas ficam doentes e perdem a força para gerar grãos. O controle de pragas impede essa destruição, garantindo que haja comida em abundância.</p>
+            <p>Sobre "intoxicar" a comida: É um mito pensar que os alimentos saem do campo venenosos. Quando os defensivos são aplicados seguindo o <strong>período de carência</strong> (tempo de espera entre passar o produto e colher), os resíduos desaparecem. A comida chega segura ao mercado. A transição para métodos biológicos é feita para proteger abelhas e baratear o custo, não porque a comida atual seja tóxica.</p>
+        </section>
+
+        <section id="pergunta2">
+            <h2>Adubos, fertilizantes e outros químicos que são naturais e não utilizam tanto agrotóxicos prejudiciais</h2>
+            <p>A grande inovação sustentável do campo chama-se <strong>Bioinsumos</strong>:</p>
             <ul>
-                <li><strong>1. Rotação de Culturas:</strong> Alterne o plantio da área (ex: soja no verão, milho no inverno). Isso confunde as pragas e quebra seu ciclo de reprodução.</li>
-                <li><strong>2. Plantio Direto:</strong> Manter a palha da colheita anterior protege a terra fértil, reduz pragas invasoras e economiza água.</li>
-                <li><strong>3. Preservação de Inimigos Naturais:</strong> Insetos benéficos como joaninhas e tesourinhas comem os pulgões e lagartas nocivas, limpando a plantação de graça.</li>
+                <li><strong>Adubação Verde e Compostagem:</strong> Uso de restos vegetais que enriquecem a terra organicamente.</li>
+                <li><strong>Inoculantes Bacterianos:</strong> Bactérias naturais que são misturadas às sementes, captam nutrientes do ar e injetam na raiz da planta, eliminando adubos químicos pesados.</li>
+                <li><strong>Defensivos Microbiológicos:</strong> Inseticidas naturais à base de fungos e vírus que atacam apenas as lagartas e não fazem mal a humanos.</li>
             </ul>
         </section>
 
-        <section id="modulo-3" class="secao-conteudo oculta">
-            <h2>Página 3: Simulador de Custos de Proteção</h2>
-            <p>Calcule uma estimativa de gastos reais do produtor para proteger sua lavoura por metro, quilômetro ou hectare e veja como economizar.</p>
-            
+        <section id="pergunta3">
+            <h2>Como identificar uma plantação com praga ou doente e como salvar?</h2>
+            <p><strong>Identificação Visual:</strong> Manchas escuras nas folhas (fungos), folhas roídas (lagartas) ou folhas amareladas (falta de nutrientes).</p>
+            <p><strong>Como Salvar:</strong> Usam-se drones com câmeras termais. Se o drone detecta uma área doente, o produtor vai apenas naquele ponto e libera microvespas (inimigos naturais) ou pulveriza bioinsumos de forma localizada, poupando o restante da fazenda.</p>
+        </section>
+
+        <hr class="linha-divisoria">
+
+        <section id="modulo-2">
+            <h2>Como Reduzir Agrotóxicos e Aumentar a Produção</h2>
+            <ul>
+                <li><strong>Rotação de Culturas:</strong> Alternar o plantio (soja no verão, milho no inverno) confunde as pragas e quebra seu ciclo.</li>
+                <li><strong>Plantio Direto:</strong> Manter a palha da colheita anterior protege a terra fértil e economiza água.</li>
+                <li><strong>Manejo Integrado (MIP):</strong> Preservar insetos benéficos como joaninhas, que comem os pulgões invasores de graça.</li>
+            </ul>
+        </section>
+
+        <hr class="linha-divisoria">
+
+        <section id="modulo-3">
+            <h2>Simulador de Custos de Proteção</h2>
             <div class="caixa-simulador">
                 <label for="campo-area">Digite a quantidade da área:</label>
                 <input type="number" id="campo-area" placeholder="Ex: 100">
@@ -96,56 +112,31 @@
                     <option value="biologico">Controle Biológico / Bioinsumos (Econômico)</option>
                 </select>
 
-                <button class="btn-calc" onclick="executarSimulacao()">Calcular Estimativa de Gasto</button>
+                <button class="btn-calc" id="btn-calcular">Calcular Estimativa de Gasto</button>
                 <div id="painel-resultado-simulador"></div>
             </div>
         </section>
 
-        <section id="modulo-4" class="secao-conteudo oculta">
-            <h2>Página 4: Arena de Jogos Agrinho</h2>
-            <div class="jogo-area-espera">
-                <p>🎮 O Jogo Interativo "Guardião da Lavoura" está sendo desenvolvido e estará disponível aqui em breve!</p>
+        <hr class="linha-divisoria">
+
+        <section id="mapa-pr">
+            <h2>Mapa do Paraná</h2>
+            <div class="container-mapa-real">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683058.0772658864!2d-54.81056589999999!3d-24.622152600000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ece4857b2824cd%3A0xcb13e0c01a9167dd!2sParan%C3%A1!5e0!3m2!1spt-BR!2sbr!4v1716940000000!5m2!1spt-BR!2sbr" width="100%" height="450" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </section>
 
-
-        <section id="menu-pergunta1" class="secao-conteudo oculta">
-            <h2>Como o controle de pragas ajuda a aumentar a produtividade e porque é tão importante mesmo "intoxicando" a comida?</h2>
-            <p><strong>Resposta Técnica Relevante:</strong> Quando insetos, fungos ou lagartas atacam uma lavoura, as plantas ficam doentes e perdem a força para gerar grãos ou frutos. O controle de pragas impede essa destruição, garantindo que haja comida em abundância para abastecer as cidades e manter o agro forte.</p>
-            <p>Sobre a expressão <em>"intoxicando" a comida</em>: É um mito comum pensar que os alimentos saem do campo venenosos. Na verdade, quando os defensivos agrícolas são aplicados por profissionais (engenheiros agrônomos), seguindo as doses recomendadas e respeitando rigidamente o <strong>período de carência</strong> (o tempo de espera obrigatório entre passar o produto e colher), os resíduos evaporam e desaparecem. Portanto, a comida chega segura e saudável ao mercado! A transição para métodos biológicos é incentivada não porque a comida seja tóxica, mas para proteger polinizadores (como as abelhas), evitar gastos excessivos e preservar a saúde do solo paranaense.</p>
-        </section>
-
-        <section id="menu-pergunta2" class="secao-conteudo oculta">
-            <h2>Adubos, fertilizantes e outros químicos que são naturais e não utilizam tanto agrotóxicos prejudiciais</h2>
-            <p>A grande inovação sustentável do campo chama-se <strong>Bioinsumos</strong>. São produtos feitos de materiais biológicos que nutrem e defendem as plantações sem agredir o meio ambiente:</p>
-            <ul>
-                <li><strong>Adubação Verde e Compostagem:</strong> Uso de restos vegetais e esterco tratado que enriquecem a terra com nitrogênio e fósforo orgânico.</li>
-                <li><strong>Inoculantes Bacterianos:</strong> Bactérias naturais da terra (como o <em>Azospirillum</em>) que são misturadas às sementes. Elas agarram o nutriente do ar e injetam direto na raiz da planta, eliminando adubos químicos pesados.</li>
-                <li><strong>Defensivos Microbiológicos:</strong> Inseticidas feitos à base de fungos e vírus naturais (como o <em>Bacillus thuringiensis</em>) que atacam apenas as lagartas ruins e não causam nenhum mal aos humanos ou animais.</li>
-            </ul>
-        </section>
-
-        <section id="menu-pergunta3" class="secao-conteudo oculta">
-            <h2>Como identificar uma plantação com praga ou doente e como salvar?</h2>
-            <p><strong>Identificação Visual Prática:</strong> Uma lavoura doente dá sinais claros: folhas com manchas escuras ou esbranquiçadas (indica fungos), folhas roídas (indica lagartas ou formigas), ou folhas amareladas e murchas (indica falta de nutrientes ou ataque de nematoides nas raízes).</p>
-            <p><strong>Como Salvar com Tecnologia:</strong> Hoje em dia, os alunos e produtores usam drones de imageamento. As câmeras especiais do drone detectam o calor e a cor exata das folhas. Se um pedaço da lavoura aparecer amarelo no computador, o produtor vai diretamente naquele ponto. Para salvar, aplica-se a liberação direcionada de microvespas (inimigos naturais que destroem os ovos das pragas) ou pulverização localizada de bioinsumos exatamente onde está o problema, poupando o resto do ecossistema.</p>
-        </section>
-
-        <section id="menu-mapa-pr" class="secao-conteudo oculta">
-            <h2>Mapa de Plantações e Culturas do Paraná</h2>
-            <p>Confira a distribuição das principais áreas produtivas e cooperativas agrícolas do nosso estado através do mapa interativo abaixo:</p>
-            <div class="container-mapa-real">
-                <iframe src="http://googleusercontent.com/maps.google.com/2" width="100%" height="450" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+        <section id="modulo-4">
+            <h2>Página 4: Arena de Jogos Agrinho</h2>
+            <div class="jogo-area-espera">
+                <p>🎮 O Jogo Interativo "Guardião da Lavoura" estará disponível aqui no futuro!</p>
             </div>
         </section>
 
     </main>
 
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        // Inicializa o VLibras do Governo de forma segura
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
+    <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
     <script src="script.js"></script>
 </body>
 </html>
