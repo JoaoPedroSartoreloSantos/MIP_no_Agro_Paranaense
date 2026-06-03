@@ -1,90 +1,98 @@
-// Variáveis Globais de Estado do Sistema
-let pontosSustentabilidade = 100;
-let orcamentoFinanceiro = 5000;
-let tamanhoFonteAtual = 16;
+// --- 1. CONTROLE DE ZOOM GERAL ---
+let zoomNivel = 1;
 
-// Mapeamento dos Elementos do DOM (HTML)
-const btnEntrar = document.getElementById("btn-entrar");
-const txtNomeUsuario = document.getElementById("nome-usuario");
-const lblBoasVindas = document.getElementById("boas-vindas");
+document.getElementById('btn-zoom-in').addEventListener('click', function() {
+    zoomNivel += 0.1;
+    document.body.style.zoom = zoomNivel;
+});
 
-const btnOpcaoA = document.getElementById("btn-opcao-a");
-const btnOpcaoB = document.getElementById("btn-opcao-b");
-const displayPontos = document.getElementById("status-sustentabilidade");
-const displayOrcamento = document.getElementById("status-financeiro");
-const feedbackResultado = document.getElementById("feedback-resultado");
-
-const btnAumentarFonte = document.getElementById("btn-fonte-aumentar");
-const btnDiminuirFonte = document.getElementById("btn-fonte-diminuir");
-
-// Função para processar a identificação do usuário
-btnEntrar.addEventListener("click", function() {
-    const nome = txtNomeUsuario.value.trim();
-    if(nome !== "") {
-        // Armazena e exibe o nome de forma personalizada
-        lblBoasVindas.innerText = `Olá, Engenheiro(a) Agrônomo(a) ${nome}! Painel operacional liberado.`;
-        lblBoasVindas.style.display = "block";
-    } else {
-        alert("Por favor, insira seu nome para autenticar.");
+document.getElementById('btn-zoom-out').addEventListener('click', function() {
+    if(zoomNivel > 0.5) { // Limite mínimo para não sumir a tela
+        zoomNivel -= 0.1;
+        document.body.style.zoom = zoomNivel;
     }
 });
 
-// Função para atualizar os dados visuais na tela
-function atualizarInterface() {
-    displayPontos.innerText = `Sustentabilidade: ${pontosSustentabilidade} pts`;
-    displayOrcamento.innerText = `Orçamento: R$ ${orcamentoFinanceiro}`;
-    
-    if (pontosSustentabilidade < 60) {
-        displayPontos.style.color = "#e74c3c"; // Alerta vermelho
+document.getElementById('btn-zoom-reset').addEventListener('click', function() {
+    zoomNivel = 1;
+    document.body.style.zoom = zoomNivel;
+});
+
+// --- 2. LEITOR DE TELA (Text-to-Speech) ---
+let isLendo = false;
+const btnLer = document.getElementById('btn-ler-pagina');
+const sinteseFala = window.speechSynthesis;
+
+btnLer.addEventListener('click', function() {
+    if (isLendo) {
+        // Se estiver lendo, para a leitura
+        sinteseFala.cancel();
+        isLendo = false;
+        btnLer.innerText = "🔊 Ler Texto";
+        btnLer.style.backgroundColor = "var(--verde-principal)";
     } else {
-        displayPontos.style.color = "#2ecc71"; // Verde estável
+        // Pega todo o texto legível da tag main
+        const textoParaLer = document.getElementById('conteudo-dinamico').innerText;
+        const utterance = new SpeechSynthesisUtterance(textoParaLer);
+        
+        // Configura para português do Brasil
+        utterance.lang = 'pt-BR';
+        
+        sinteseFala.speak(utterance);
+        isLendo = true;
+        btnLer.innerText = "🔇 Parar Leitura";
+        btnLer.style.backgroundColor = "var(--vermelho-alerta)"; // Um feedback visual
+        
+        // Quando terminar de ler sozinho, reseta o botão
+        utterance.onend = function() {
+            isLendo = false;
+            btnLer.innerText = "🔊 Ler Texto";
+            btnLer.style.backgroundColor = "var(--verde-principal)";
+        };
     }
+});
+
+// --- 3. NAVEGAÇÃO ENTRE AS 4 PÁGINAS (Dropdown) ---
+function mudarPagina(idPagina) {
+    // Esconde todas as seções
+    document.getElementById('pag-1').className = 'pagina-oculta';
+    document.getElementById('pag-2').className = 'pagina-oculta';
+    document.getElementById('pag-3').className = 'pagina-oculta';
+    document.getElementById('pag-4').className = 'pagina-oculta';
+
+    // Mostra a selecionada
+    document.getElementById(idPagina).className = 'pagina-ativa';
 }
 
-// Função para a Decisão A (Química tradicional pesada)
-btnOpcaoA.addEventListener("click", function() {
-    pontosSustentabilidade -= 40;
-    orcamentoFinanceiro -= 1500;
-    
-    feedbackResultado.innerHTML = `
-        <div style="background-color: #2c1a1a; padding: 15px; border-radius: 4px; border: 1px solid #e74c3c; margin-top: 15px;">
-            <strong>Resultado Crítico:</strong> Alta eliminação de pragas, porém causou mortalidade de polinizadores (abelhas) e quebrou o equilíbrio ambiental em Cascavel. Custo alto.
-        </div>
-    `;
-    encerrarRodada();
-});
+// --- 4. SIMULADOR DE CUSTOS (Módulo 3) ---
+function calcularCustos() {
+    const hectares = document.getElementById('hectares').value;
+    const metodo = document.getElementById('metodo').value;
+    const divResultado = document.getElementById('resultado-simulador');
 
-// Função para a Decisão B (MIP / Controle Biológico)
-btnOpcaoB.addEventListener("click", function() {
-    pontosSustentabilidade = Math.min(pontosSustentabilidade + 10, 100);
-    orcamentoFinanceiro -= 400;
-    
-    feedbackResultado.innerHTML = `
-        <div style="background-color: #1a2c1e; padding: 15px; border-radius: 4px; border: 1px solid #2ecc71; margin-top: 15px;">
-            <strong>Resultado Excelente:</strong> A introdução de inimigos naturais conteve a infestação! O solo foi protegido e os custos foram severamente reduzidos.
-        </div>
-    `;
-    encerrarRodada();
-});
-
-// Função para desabilitar interações pós-escolha
-function encerrarRodada() {
-    btnOpcaoA.disabled = true;
-    btnOpcaoB.disabled = true;
-    btnOpcaoA.style.opacity = "0.5";
-    btnOpcaoB.style.opacity = "0.5";
-    atualizarInterface();
-}
-
-// Funções de Acessibilidade (Alteração do tamanho da fonte via JS)
-btnAumentarFonte.addEventListener("click", function() {
-    tamanhoFonteAtual += 2;
-    document.body.style.fontSize = tamanhoFonteAtual + "px";
-});
-
-btnDiminuirFonte.addEventListener("click", function() {
-    if(tamanhoFonteAtual > 12) {
-        tamanhoFonteAtual -= 2;
-        document.body.style.fontSize = tamanhoFonteAtual + "px";
+    if (!hectares || hectares <= 0) {
+        divResultado.innerText = "Por favor, insira um número válido de hectares.";
+        return;
     }
-});
+
+    let custoPorHectare = 0;
+    let mensagemDica = "";
+
+    if (metodo === "quimico") {
+        custoPorHectare = 450; // Valor fictício para química convencional
+        mensagemDica = "Atenção: Embora eficiente a curto prazo, o uso contínuo pode degradar o solo e gerar resistência nas pragas, exigindo doses maiores no futuro.";
+    } else if (metodo === "biologico") {
+        custoPorHectare = 280; // Valor fictício menor para controle biológico
+        mensagemDica = "Excelente escolha! O Controle Biológico (MIP) protege a biodiversidade local (abelhas e lençóis freáticos) e reduz o custo da sua lavoura ao longo do tempo.";
+    }
+
+    const custoTotal = hectares * custoPorHectare;
+
+    // Formatação de moeda BRL
+    const valorFormatado = custoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    divResultado.innerHTML = `
+        <p>Custo estimado para proteger ${hectares} hectares: <strong>${valorFormatado}</strong></p>
+        <p style="margin-top: 10px; font-weight: normal;"><em>${mensagemDica}</em></p>
+    `;
+}

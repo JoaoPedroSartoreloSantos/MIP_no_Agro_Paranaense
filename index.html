@@ -3,55 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guardião da Lavoura Paranaense - Agrinho 2026</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Agrinho 2026 - Conexão Verde Sustentável</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-theme">
+<body>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
 
-    <header class="main-header">
-        <div class="header-container">
-            <h1>Guardião da Lavoura</h1>
-            <div class="accessibility-controls">
-                <button id="btn-fonte-aumentar" class="btn-acc" aria-label="Aumentar Fonte">A+</button>
-                <button id="btn-fonte-diminuir" class="btn-acc" aria-label="Diminuir Fonte">A-</button>
-            </div>
+    <header>
+        <div class="header-logo">
+            <h1>Agrinho 2026: <span>Conexão Verde Sustentável</span></h1>
+        </div>
+        <div class="header-controles">
+            <button id="btn-zoom-out" class="btn-acao" title="Diminuir Zoom">-</button>
+            <button id="btn-zoom-reset" class="btn-acao" title="Resetar Zoom">🔍</button>
+            <button id="btn-zoom-in" class="btn-acao" title="Aumentar Zoom">+</button>
+            <button id="btn-ler-pagina" class="btn-acao" title="Ouvir Página">🔊 Ler Texto</button>
         </div>
     </header>
 
-    <main class="main-content">
-        <section id="secao-identificacao" class="card-painel">
-            <h2>Identificação do Agrônomo</h2>
-            <label for="nome-usuario">Digite seu nome para iniciar o monitoramento:</label>
-            <div class="input-group">
-                <input type="text" id="nome-usuario" placeholder="Ex: Maria Silva">
-                <button id="btn-entrar">Iniciar Missão</button>
+    <nav class="menu-principal">
+        <div class="dropdown">
+            <button class="dropbtn">⋮ Módulos</button>
+            <div class="dropdown-content">
+                <a href="#" onclick="mudarPagina('pag-1')">1. Visão Geral e Mapa</a>
+                <a href="#" onclick="mudarPagina('pag-2')">2. Redução de Agrotóxicos</a>
+                <a href="#" onclick="mudarPagina('pag-3')">3. Simulador de Custos</a>
+                <a href="#" onclick="mudarPagina('pag-4')">4. Mini-Jogo (Em Breve)</a>
             </div>
-            <p id="boas-vindas" class="texto-oculto"></p>
-        </section>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#artigo1">Controle de Pragas e Segurança Alimentar</a></li>
+            <li><a href="#artigo2">Bioinsumos: Fertilizantes Naturais</a></li>
+            <li><a href="#artigo3">Diagnóstico Rápido: Salvando Lavouras</a></li>
+            <li><a href="#mapa">Mapa Agrícola do Paraná</a></li>
+        </ul>
+    </nav>
 
-        <section id="simulador-campo" class="card-painel">
-            <div class="painel-header">
-                <h2>Simulador MIP (Manejo Integrado de Pragas)</h2>
-                <div class="status-container">
-                    <span id="status-sustentabilidade">Sustentabilidade: 100 pts</span>
-                    <span id="status-financeiro">Orçamento: R$ 5000</span>
+    <main id="conteudo-dinamico">
+        
+        <section id="pag-1" class="pagina-ativa">
+            <h2>Notícias e Exemplos Práticos</h2>
+            <div class="grid-noticias">
+                <div class="card">
+                    <div class="img-placeholder trator">Foto: Trator Tecnológico</div>
+                    <h3>Produtividade em Alta</h3>
+                    <p>Uso de tecnologias de precisão no Paraná reduz aplicação de químicos em 30%.</p>
+                </div>
+                <div class="card">
+                    <div class="img-placeholder plantacao">Foto: Plantação Saudável</div>
+                    <h3>O Poder do Controle Biológico</h3>
+                    <p>Vespinhas ajudam produtores de soja a combater percevejos naturalmente.</p>
                 </div>
             </div>
 
-            <div class="alerta-box">
-                <p id="texto-situacao"><strong>[ALERTA DRONE - CASCAVEL/PR]:</strong> O monitoramento detectou 3 lagartas por metro na lavoura de soja. Qual é a sua estratégia?</p>
+            <h2 id="mapa">Mapa de Plantações do Paraná</h2>
+            <div class="mapa-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680979.790103126!2d-54.34181966597576!3d-24.63004354245974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ece529b35bc45d%3A0xcda6dc6a06691cb9!2sParan%C3%A1!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
+        </section>
 
-            <div class="botoes-decisao">
-                <button id="btn-opcao-a" class="btn-acao btn-perigo">Opção A: Pulverizar Químico Imediatamente</button>
-                <button id="btn-opcao-b" class="btn-acao btn-sucesso">Opção B: Aplicar Controle Biológico (MIP)</button>
+        <section id="pag-2" class="pagina-oculta">
+            <h2>Como Diminuir o Uso de Agrotóxicos?</h2>
+            <p>A transição para um modelo sustentável exige conhecimento. O MIP (Manejo Integrado de Pragas) foca em monitorar a lavoura antes de aplicar qualquer produto.</p>
+            <ul>
+                <li><strong>Rotação de Culturas:</strong> Quebra o ciclo de vida das pragas.</li>
+                <li><strong>Adubação Verde:</strong> Melhora a saúde do solo naturalmente.</li>
+                <li><strong>Inimigos Naturais:</strong> Uso de predadores naturais para conter infestações.</li>
+            </ul>
+        </section>
+
+        <section id="pag-3" class="pagina-oculta">
+            <h2>Simulador de Proteção de Lavoura</h2>
+            <div class="simulador-box">
+                <label for="hectares">Quantos Hectares possui sua lavoura?</label>
+                <input type="number" id="hectares" placeholder="Ex: 50">
+                
+                <label for="metodo">Escolha o Método de Defesa:</label>
+                <select id="metodo">
+                    <option value="quimico">Controle Químico Convencional</option>
+                    <option value="biologico">Controle Biológico (MIP)</option>
+                </select>
+
+                <button onclick="calcularCustos()" class="btn-acao" style="margin-top: 15px;">Estimar Custos</button>
+
+                <div id="resultado-simulador" style="margin-top: 20px; font-weight: bold; color: var(--verde-escuro);"></div>
             </div>
+        </section>
 
-            <div id="feedback-resultado"></div>
+        <section id="pag-4" class="pagina-oculta">
+            <h2>Módulo 4: Jogo Interativo</h2>
+            <div class="jogo-placeholder">
+                <p>O Jogo "Guardião da Lavoura" será adicionado aqui em breve!</p>
+            </div>
         </section>
     </main>
 
-    <script src="main.js"></script>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>
