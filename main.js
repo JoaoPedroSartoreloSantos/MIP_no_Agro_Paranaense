@@ -1,116 +1,92 @@
-// ==========================================
-// 1. SISTEMA DE ZOOM ACESSÍVEL (Corrigido)
-// ==========================================
-// Em vez de usar CSS "zoom" que falha em alguns navegadores,
-// mudamos o tamanho da fonte raiz do site (em pixels).
-let tamanhoFonteBase = 16; 
+// Garantir execução segura após carregamento da página
+document.addEventListener("DOMContentLoaded", function() {
 
-document.getElementById('btn-zoom-in').addEventListener('click', function() {
-    if(tamanhoFonteBase < 24) { // Limite máximo
-        tamanhoFonteBase += 2;
-        document.documentElement.style.fontSize = tamanhoFonteBase + 'px';
-    }
-});
-
-document.getElementById('btn-zoom-out').addEventListener('click', function() {
-    if(tamanhoFonteBase > 12) { // Limite mínimo
-        tamanhoFonteBase -= 2;
-        document.documentElement.style.fontSize = tamanhoFonteBase + 'px';
-    }
-});
-
-document.getElementById('btn-zoom-reset').addEventListener('click', function() {
-    tamanhoFonteBase = 16;
-    document.documentElement.style.fontSize = tamanhoFonteBase + 'px';
-});
-
-// ==========================================
-// 2. LEITOR DE TELA (TTS) (Corrigido)
-// ==========================================
-let isLendo = false;
-const btnLer = document.getElementById('btn-ler-pagina');
-const sinteseFala = window.speechSynthesis;
-
-btnLer.addEventListener('click', function() {
-    // Se o navegador não suportar voz
-    if (!('speechSynthesis' in window)) {
-        alert("Desculpe, seu navegador não suporta leitura de voz.");
-        return;
-    }
-
-    if (isLendo) {
-        // Para a leitura imediatamente
-        sinteseFala.cancel();
-        isLendo = false;
-        btnLer.innerText = "🔊 Ouvir Site";
-        btnLer.style.backgroundColor = "var(--verde-principal)";
-    } else {
-        // Pega apenas o texto da página que está visível na tela!
-        const paginaVisivel = document.querySelector('.pagina-ativa');
-        const textoParaLer = paginaVisivel.innerText || paginaVisivel.textContent;
+    // ==========================================
+    // 1. SISTEMA SPA: MUDANÇA DE TEXTO EM BAIXO DO MENU
+    // ==========================================
+    window.mudarAba = function(idAlvo, evento) {
+        if(evento) evento.preventDefault(); // Evita salto de página ou recarregamento
         
-        if (textoParaLer.trim() === "") return;
-
-        const utterance = new SpeechSynthesisUtterance(textoParaLer);
-        utterance.lang = 'pt-BR'; // Força sotaque brasileiro
-        utterance.rate = 1.0;     // Velocidade normal
+        // Seleciona todas as seções de conteúdo do site
+        const todasSecoes = document.querySelectorAll('.secao-conteudo');
         
-        sinteseFala.speak(utterance);
-        isLendo = true;
-        btnLer.innerText = "🔇 Parar Leitura";
-        btnLer.style.backgroundColor = "red"; // Fica vermelho pra chamar atenção
+        // Oculta absolutamente todas as seções
+        todasSecoes.forEach(function(secao) {
+            secao.classList.remove('ativa');
+            secao.classList.add('oculta');
+        });
         
-        // Quando terminar de ler sozinho, reseta o botão
-        utterance.onend = function() {
-            isLendo = false;
-            btnLer.innerText = "🔊 Ouvir Site";
-            btnLer.style.backgroundColor = "var(--verde-principal)";
-        };
-    }
-});
+        // Exibe apenas a seção alvo do clique
+        const secaoAlvo = document.getElementById(idAlvo);
+        if(secaoAlvo) {
+            secaoAlvo.classList.remove('oculta');
+            secaoAlvo.classList.add('ativa');
+        }
 
-// ==========================================
-// 3. NAVEGAÇÃO ENTRE AS PÁGINAS (Corrigido)
-// ==========================================
-function mudarPagina(idPagina) {
-    // Esconde todas as 4 seções
-    document.getElementById('pag-1').className = 'pagina-oculta';
-    document.getElementById('pag-2').className = 'pagina-oculta';
-    document.getElementById('pag-3').className = 'pagina-oculta';
-    document.getElementById('pag-4').className = 'pagina-oculta';
+        // Fecha o dropdown de 3 pontinhos automaticamente ao clicar
+        document.getElementById("dropdown-modulos").style.display = "none";
 
-    // Mostra apenas a que o usuário clicou
-    document.getElementById(idPagina).className = 'pagina-ativa';
+        // Se a voz estiver ativa ao mudar de aba, desliga para não confundir o usuário
+        if (estaLendo) {
+            pararVoz();
+        }
+    };
 
-    // Para a voz automaticamente se o usuário trocar de página no meio da leitura
-    if(isLendo) {
-        sinteseFala.cancel();
-        isLendo = false;
-        btnLer.innerText = "🔊 Ouvir Site";
-        btnLer.style.backgroundColor = "var(--verde-principal)";
-    }
-}
+    // Função auxiliar para ligar/desligar o menu dos 3 pontinhos
+    window.toggleDropdown = function() {
+        const dropdown = document.getElementById("dropdown-modulos");
+        if(dropdown.style.display === "block") {
+            dropdown.style.display = "none";
+        } else {
+            dropdown.style.display = "block";
+        }
+    };
 
-// ==========================================
-// 4. SIMULADOR DE CUSTOS E PROTEÇÃO
-// ==========================================
-function calcularCustos() {
-    const hectares = document.getElementById('hectares').value;
-    const metodo = document.getElementById('metodo').value;
-    const divResultado = document.getElementById('resultado-simulador');
+    // Fecha o menu de 3 pontinhos se clicar fora dele
+    window.onclick = function(event) {
+        if (!event.target.matches('.botao-3pontinhos')) {
+            const dropdowns = document.getElementsByClassName("conteudo-dropdown");
+            for (let i = 0; i < dropdowns.length; i++) {
+                dropdowns[i].style.display = "none";
+            }
+        }
+    };
 
-    if (!hectares || hectares <= 0) {
-        divResultado.innerHTML = "<span style='color: red;'>Por favor, digite um número válido de hectares.</span>";
-        return;
-    }
 
-    let custoPorHectare = 0;
-    let mensagemImpacto = "";
-    let corFundo = "";
+    // ==========================================
+    // 2. SISTEMA DE ZOOM DA PÁGINA INTEIRA CORRIGIDO
+    // ==========================================
+    let escalaZoomGlobal = 1.0;
 
-    if (metodo === "quimico") {
-        custoPorHectare = 450; 
-        corFundo = "#ffdddd"; // Vermelho claro
-        mensagemImpacto = "<strong>Alerta:</strong> O uso químico convencional resolve rapidamente, mas pode impactar abelhas e nascentes d'água. Uso contínuo gera resistência nas pragas.";
-    } else if (metodo === "biologico") {
-        cust
+    document.getElementById("btn-aumentar-zoom").addEventListener("click", function() {
+        if (escalaZoomGlobal < 1.5) {
+            escalaZoomGlobal += 0.1;
+            document.body.style.transform = `scale(${escalaZoomGlobal})`;
+            document.body.style.width = (100 / escalaZoomGlobal) + "%";
+        }
+    });
+
+    document.getElementById("btn-diminuir-zoom").addEventListener("click", function() {
+        if (escalaZoomGlobal > 0.7) {
+            escalaZoomGlobal -= 0.1;
+            document.body.style.transform = `scale(${escalaZoomGlobal})`;
+            document.body.style.width = (100 / escalaZoomGlobal) + "%";
+        }
+    });
+
+    document.getElementById("btn-resetar-zoom").addEventListener("click", function() {
+        escalaZoomGlobal = 1.0;
+        document.body.style.transform = `scale(1.0)`;
+        document.body.style.width = "100%";
+    });
+
+
+    // ==========================================
+    // 3. LEITOR DE TELA (VOZ) CORRIGIDO
+    // ==========================================
+    let estaLendo = false;
+    const btnVoz = document.getElementById("btn-fala");
+    const motorVoz = window.speechSynthesis;
+
+    btnVoz.addEventListener("click", function() {
+        if
