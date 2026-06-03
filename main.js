@@ -1,98 +1,116 @@
-// --- 1. CONTROLE DE ZOOM GERAL ---
-let zoomNivel = 1;
+// ==========================================
+// 1. SISTEMA DE ZOOM ACESSÍVEL (Corrigido)
+// ==========================================
+// Em vez de usar CSS "zoom" que falha em alguns navegadores,
+// mudamos o tamanho da fonte raiz do site (em pixels).
+let tamanhoFonteBase = 16; 
 
 document.getElementById('btn-zoom-in').addEventListener('click', function() {
-    zoomNivel += 0.1;
-    document.body.style.zoom = zoomNivel;
+    if(tamanhoFonteBase < 24) { // Limite máximo
+        tamanhoFonteBase += 2;
+        document.documentElement.style.fontSize = tamanhoFonteBase + 'px';
+    }
 });
 
 document.getElementById('btn-zoom-out').addEventListener('click', function() {
-    if(zoomNivel > 0.5) { // Limite mínimo para não sumir a tela
-        zoomNivel -= 0.1;
-        document.body.style.zoom = zoomNivel;
+    if(tamanhoFonteBase > 12) { // Limite mínimo
+        tamanhoFonteBase -= 2;
+        document.documentElement.style.fontSize = tamanhoFonteBase + 'px';
     }
 });
 
 document.getElementById('btn-zoom-reset').addEventListener('click', function() {
-    zoomNivel = 1;
-    document.body.style.zoom = zoomNivel;
+    tamanhoFonteBase = 16;
+    document.documentElement.style.fontSize = tamanhoFonteBase + 'px';
 });
 
-// --- 2. LEITOR DE TELA (Text-to-Speech) ---
+// ==========================================
+// 2. LEITOR DE TELA (TTS) (Corrigido)
+// ==========================================
 let isLendo = false;
 const btnLer = document.getElementById('btn-ler-pagina');
 const sinteseFala = window.speechSynthesis;
 
 btnLer.addEventListener('click', function() {
+    // Se o navegador não suportar voz
+    if (!('speechSynthesis' in window)) {
+        alert("Desculpe, seu navegador não suporta leitura de voz.");
+        return;
+    }
+
     if (isLendo) {
-        // Se estiver lendo, para a leitura
+        // Para a leitura imediatamente
         sinteseFala.cancel();
         isLendo = false;
-        btnLer.innerText = "🔊 Ler Texto";
+        btnLer.innerText = "🔊 Ouvir Site";
         btnLer.style.backgroundColor = "var(--verde-principal)";
     } else {
-        // Pega todo o texto legível da tag main
-        const textoParaLer = document.getElementById('conteudo-dinamico').innerText;
-        const utterance = new SpeechSynthesisUtterance(textoParaLer);
+        // Pega apenas o texto da página que está visível na tela!
+        const paginaVisivel = document.querySelector('.pagina-ativa');
+        const textoParaLer = paginaVisivel.innerText || paginaVisivel.textContent;
         
-        // Configura para português do Brasil
-        utterance.lang = 'pt-BR';
+        if (textoParaLer.trim() === "") return;
+
+        const utterance = new SpeechSynthesisUtterance(textoParaLer);
+        utterance.lang = 'pt-BR'; // Força sotaque brasileiro
+        utterance.rate = 1.0;     // Velocidade normal
         
         sinteseFala.speak(utterance);
         isLendo = true;
         btnLer.innerText = "🔇 Parar Leitura";
-        btnLer.style.backgroundColor = "var(--vermelho-alerta)"; // Um feedback visual
+        btnLer.style.backgroundColor = "red"; // Fica vermelho pra chamar atenção
         
         // Quando terminar de ler sozinho, reseta o botão
         utterance.onend = function() {
             isLendo = false;
-            btnLer.innerText = "🔊 Ler Texto";
+            btnLer.innerText = "🔊 Ouvir Site";
             btnLer.style.backgroundColor = "var(--verde-principal)";
         };
     }
 });
 
-// --- 3. NAVEGAÇÃO ENTRE AS 4 PÁGINAS (Dropdown) ---
+// ==========================================
+// 3. NAVEGAÇÃO ENTRE AS PÁGINAS (Corrigido)
+// ==========================================
 function mudarPagina(idPagina) {
-    // Esconde todas as seções
+    // Esconde todas as 4 seções
     document.getElementById('pag-1').className = 'pagina-oculta';
     document.getElementById('pag-2').className = 'pagina-oculta';
     document.getElementById('pag-3').className = 'pagina-oculta';
     document.getElementById('pag-4').className = 'pagina-oculta';
 
-    // Mostra a selecionada
+    // Mostra apenas a que o usuário clicou
     document.getElementById(idPagina).className = 'pagina-ativa';
+
+    // Para a voz automaticamente se o usuário trocar de página no meio da leitura
+    if(isLendo) {
+        sinteseFala.cancel();
+        isLendo = false;
+        btnLer.innerText = "🔊 Ouvir Site";
+        btnLer.style.backgroundColor = "var(--verde-principal)";
+    }
 }
 
-// --- 4. SIMULADOR DE CUSTOS (Módulo 3) ---
+// ==========================================
+// 4. SIMULADOR DE CUSTOS E PROTEÇÃO
+// ==========================================
 function calcularCustos() {
     const hectares = document.getElementById('hectares').value;
     const metodo = document.getElementById('metodo').value;
     const divResultado = document.getElementById('resultado-simulador');
 
     if (!hectares || hectares <= 0) {
-        divResultado.innerText = "Por favor, insira um número válido de hectares.";
+        divResultado.innerHTML = "<span style='color: red;'>Por favor, digite um número válido de hectares.</span>";
         return;
     }
 
     let custoPorHectare = 0;
-    let mensagemDica = "";
+    let mensagemImpacto = "";
+    let corFundo = "";
 
     if (metodo === "quimico") {
-        custoPorHectare = 450; // Valor fictício para química convencional
-        mensagemDica = "Atenção: Embora eficiente a curto prazo, o uso contínuo pode degradar o solo e gerar resistência nas pragas, exigindo doses maiores no futuro.";
+        custoPorHectare = 450; 
+        corFundo = "#ffdddd"; // Vermelho claro
+        mensagemImpacto = "<strong>Alerta:</strong> O uso químico convencional resolve rapidamente, mas pode impactar abelhas e nascentes d'água. Uso contínuo gera resistência nas pragas.";
     } else if (metodo === "biologico") {
-        custoPorHectare = 280; // Valor fictício menor para controle biológico
-        mensagemDica = "Excelente escolha! O Controle Biológico (MIP) protege a biodiversidade local (abelhas e lençóis freáticos) e reduz o custo da sua lavoura ao longo do tempo.";
-    }
-
-    const custoTotal = hectares * custoPorHectare;
-
-    // Formatação de moeda BRL
-    const valorFormatado = custoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
-    divResultado.innerHTML = `
-        <p>Custo estimado para proteger ${hectares} hectares: <strong>${valorFormatado}</strong></p>
-        <p style="margin-top: 10px; font-weight: normal;"><em>${mensagemDica}</em></p>
-    `;
-}
+        cust

@@ -16,13 +16,13 @@
 
     <header>
         <div class="header-logo">
-            <h1>Agrinho 2026: <span>Conexão Verde Sustentável</span></h1>
+            <h1>Agrinho 2026: <span>Conexão Verde</span></h1>
         </div>
         <div class="header-controles">
-            <button id="btn-zoom-out" class="btn-acao" title="Diminuir Zoom">-</button>
-            <button id="btn-zoom-reset" class="btn-acao" title="Resetar Zoom">🔍</button>
-            <button id="btn-zoom-in" class="btn-acao" title="Aumentar Zoom">+</button>
-            <button id="btn-ler-pagina" class="btn-acao" title="Ouvir Página">🔊 Ler Texto</button>
+            <button id="btn-zoom-out" class="btn-acao" title="Diminuir Zoom">A-</button>
+            <button id="btn-zoom-reset" class="btn-acao" title="Tamanho Padrão">A</button>
+            <button id="btn-zoom-in" class="btn-acao" title="Aumentar Zoom">A+</button>
+            <button id="btn-ler-pagina" class="btn-acao" title="Ouvir Página">🔊 Ouvir Site</button>
         </div>
     </header>
 
@@ -30,84 +30,57 @@
         <div class="dropdown">
             <button class="dropbtn">⋮ Módulos</button>
             <div class="dropdown-content">
-                <a href="#" onclick="mudarPagina('pag-1')">1. Visão Geral e Mapa</a>
-                <a href="#" onclick="mudarPagina('pag-2')">2. Redução de Agrotóxicos</a>
+                <a href="#" onclick="mudarPagina('pag-1')">1. Artigos e Mapa</a>
+                <a href="#" onclick="mudarPagina('pag-2')">2. Redução de Químicos</a>
                 <a href="#" onclick="mudarPagina('pag-3')">3. Simulador de Custos</a>
-                <a href="#" onclick="mudarPagina('pag-4')">4. Mini-Jogo (Em Breve)</a>
+                <a href="#" onclick="mudarPagina('pag-4')">4. Mini-Jogo</a>
             </div>
         </div>
         
         <ul class="nav-links">
-            <li><a href="#artigo1">Controle de Pragas e Segurança Alimentar</a></li>
-            <li><a href="#artigo2">Bioinsumos: Fertilizantes Naturais</a></li>
-            <li><a href="#artigo3">Diagnóstico Rápido: Salvando Lavouras</a></li>
-            <li><a href="#mapa">Mapa Agrícola do Paraná</a></li>
+            <li><a href="#artigo1" onclick="mudarPagina('pag-1')">Controle de Pragas</a></li>
+            <li><a href="#artigo2" onclick="mudarPagina('pag-1')">Bioinsumos Naturais</a></li>
+            <li><a href="#artigo3" onclick="mudarPagina('pag-1')">Diagnóstico e Cura</a></li>
+            <li><a href="#mapa" onclick="mudarPagina('pag-1')">Mapa do Paraná</a></li>
         </ul>
     </nav>
 
     <main id="conteudo-dinamico">
         
         <section id="pag-1" class="pagina-ativa">
-            <h2>Notícias e Exemplos Práticos</h2>
-            <div class="grid-noticias">
-                <div class="card">
-                    <div class="img-placeholder trator">Foto: Trator Tecnológico</div>
-                    <h3>Produtividade em Alta</h3>
-                    <p>Uso de tecnologias de precisão no Paraná reduz aplicação de químicos em 30%.</p>
-                </div>
-                <div class="card">
-                    <div class="img-placeholder plantacao">Foto: Plantação Saudável</div>
-                    <h3>O Poder do Controle Biológico</h3>
-                    <p>Vespinhas ajudam produtores de soja a combater percevejos naturalmente.</p>
-                </div>
+            
+            <div class="valores-box">
+                <h3>Nossos Valores - Agrinho 2026</h3>
+                <p><strong>Sustentabilidade:</strong> Produzir hoje garantindo os recursos de amanhã.<br>
+                <strong>Inovação:</strong> Usar a tecnologia (drones, IA) a favor do campo.<br>
+                <strong>Responsabilidade:</strong> Garantir alimento seguro e de qualidade na mesa de todos.</p>
             </div>
 
-            <h2 id="mapa">Mapa de Plantações do Paraná</h2>
+            <article id="artigo1">
+                <h2>Como o controle de pragas aumenta a produtividade?</h2>
+                <p>O controle de pragas é fundamental para a agricultura. Quando insetos ou fungos atacam uma lavoura, a planta gasta toda a sua energia tentando sobreviver, em vez de focar em crescer e gerar frutos ou grãos. Ao proteger a planta, garantimos colheitas recordes.</p>
+                <p><strong>Um ponto importante:</strong> Produtos químicos, quando aplicados seguindo o receituário agronômico e respeitando o período de carência (tempo entre a aplicação e a colheita), <strong>não intoxicam</strong> a nossa comida. O alimento que chega à mesa é seguro. Porém, a agricultura moderna busca reduzir esses químicos para proteger o meio ambiente (abelhas, solo e rios) e diminuir os custos para o produtor.</p>
+                <img src="https://images.unsplash.com/photo-1592982537447-6f23f0c3d9b4?auto=format&fit=crop&w=800&q=80" alt="Trator moderno em campo" style="width:100%; border-radius:8px; margin-top:10px;">
+                <p><em>Exemplo de trator utilizando agricultura de precisão para aplicar produtos apenas onde é necessário.</em></p>
+            </article>
+
+            <article id="artigo2">
+                <h2>Bioinsumos: Fertilizantes e Defensivos Naturais</h2>
+                <p>A grande revolução do agro paranaense são os bioinsumos! Em vez de usar agrotóxicos pesados, os cientistas descobriram como usar a própria natureza a nosso favor.</p>
+                <ul>
+                    <li><strong>Bactérias do Bem:</strong> Como a <em>Bradyrhizobium</em>, que capta nitrogênio do ar e joga na raiz da soja, substituindo adubos químicos.</li>
+                    <li><strong>Fungos Protetores:</strong> Fungos como o <em>Trichoderma</em> atacam doenças no solo antes que elas cheguem às plantas.</li>
+                    <li><strong>Vespinhas:</strong> Insetos minúsculos criados em laboratório que são soltos na lavoura para comer os ovos das pragas (como o percevejo).</li>
+                </ul>
+            </article>
+
+            <article id="artigo3">
+                <h2>Como identificar uma plantação doente e como salvar?</h2>
+                <p>O diagnóstico rápido é a chave. Hoje, produtores usam drones com câmeras termais para sobrevoar a lavoura. Se uma área aparece "vermelha" ou "amarela" no mapa do drone, significa que as plantas ali estão estressadas (por falta de água, pragas ou doenças).</p>
+                <p><strong>Sinais visuais:</strong> Folhas amareladas, manchas pretas, raízes podres ou a presença de insetos mastigadores. <br>
+                <strong>Como salvar:</strong> Primeiro, isola-se o problema (Manejo Integrado de Pragas). Se for uma doença fúngica inicial, aplica-se um controle biológico específico apenas na área afetada, evitando espalhar produtos pela fazenda inteira.</p>
+            </article>
+
+            <h2 id="mapa" style="margin-top: 40px;">Mapa Agrícola do Paraná</h2>
             <div class="mapa-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680979.790103126!2d-54.34181966597576!3d-24.63004354245974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ece529b35bc45d%3A0xcda6dc6a06691cb9!2sParan%C3%A1!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </section>
-
-        <section id="pag-2" class="pagina-oculta">
-            <h2>Como Diminuir o Uso de Agrotóxicos?</h2>
-            <p>A transição para um modelo sustentável exige conhecimento. O MIP (Manejo Integrado de Pragas) foca em monitorar a lavoura antes de aplicar qualquer produto.</p>
-            <ul>
-                <li><strong>Rotação de Culturas:</strong> Quebra o ciclo de vida das pragas.</li>
-                <li><strong>Adubação Verde:</strong> Melhora a saúde do solo naturalmente.</li>
-                <li><strong>Inimigos Naturais:</strong> Uso de predadores naturais para conter infestações.</li>
-            </ul>
-        </section>
-
-        <section id="pag-3" class="pagina-oculta">
-            <h2>Simulador de Proteção de Lavoura</h2>
-            <div class="simulador-box">
-                <label for="hectares">Quantos Hectares possui sua lavoura?</label>
-                <input type="number" id="hectares" placeholder="Ex: 50">
-                
-                <label for="metodo">Escolha o Método de Defesa:</label>
-                <select id="metodo">
-                    <option value="quimico">Controle Químico Convencional</option>
-                    <option value="biologico">Controle Biológico (MIP)</option>
-                </select>
-
-                <button onclick="calcularCustos()" class="btn-acao" style="margin-top: 15px;">Estimar Custos</button>
-
-                <div id="resultado-simulador" style="margin-top: 20px; font-weight: bold; color: var(--verde-escuro);"></div>
-            </div>
-        </section>
-
-        <section id="pag-4" class="pagina-oculta">
-            <h2>Módulo 4: Jogo Interativo</h2>
-            <div class="jogo-placeholder">
-                <p>O Jogo "Guardião da Lavoura" será adicionado aqui em breve!</p>
-            </div>
-        </section>
-    </main>
-
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
-    <script src="script.js"></script>
-</body>
-</html>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683074.72304919!2d-54.34114210609312!3d-24.64684999903998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!
