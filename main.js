@@ -1,39 +1,10 @@
 // ==========================================
-// 1. MENU DE 3 PONTINHOS (Dropdown Consertado)
-// ==========================================
-const btnModulos = document.getElementById("btn-modulos");
-const dropdownModulos = document.getElementById("dropdown-modulos");
-
-btnModulos.addEventListener("click", function(event) {
-    // Evita que o clique se espalhe e feche o menu instantaneamente
-    event.stopPropagation(); 
-    // Liga e desliga a classe que mostra o menu
-    dropdownModulos.classList.toggle("show");
-});
-
-// Se o usuário clicar em qualquer outro lugar da tela, o menu fecha
-document.addEventListener("click", function(event) {
-    // Se o lugar clicado NÃO for o botão e NÃO for o menu em si
-    if (event.target !== btnModulos && !dropdownModulos.contains(event.target)) {
-        dropdownModulos.classList.remove("show");
-    }
-});
-
-// Fechar o menu automaticamente após o usuário clicar em um dos links dele
-const linksDropdown = dropdownModulos.querySelectorAll("a");
-linksDropdown.forEach(function(link) {
-    link.addEventListener("click", function() {
-        dropdownModulos.classList.remove("show");
-    });
-});
-
-// ==========================================
-// 2. ZOOM ACESSÍVEL (Aumentando e Diminuindo)
+// 1. ZOOM ACESSÍVEL (Apenas Aumentar e Diminuir)
 // ==========================================
 let tamanhoFonte = 16; 
 
 document.getElementById("btn-aumentar-zoom").addEventListener("click", function() {
-    if (tamanhoFonte < 26) { 
+    if (tamanhoFonte < 28) { 
         tamanhoFonte += 2;
         document.documentElement.style.fontSize = tamanhoFonte + "px";
     }
@@ -46,39 +17,67 @@ document.getElementById("btn-diminuir-zoom").addEventListener("click", function(
     }
 });
 
-document.getElementById("btn-resetar-zoom").addEventListener("click", function() {
-    tamanhoFonte = 16;
-    document.documentElement.style.fontSize = tamanhoFonte + "px";
-});
 
 // ==========================================
-// 3. LEITOR DE VOZ (Lendo o conteúdo do site)
+// 2. LEITOR DE VOZ (Anti-travamento)
 // ==========================================
+// Lemos o texto em "pedaços" (parágrafos e títulos) para o navegador não bugar.
 let isLendo = false;
 const btnVoz = document.getElementById("btn-fala");
 const sintese = window.speechSynthesis;
+let pedacosDeTexto = [];
+let indiceAtual = 0;
 
 btnVoz.addEventListener("click", function() {
     if (isLendo) {
+        // Se clicar de novo, para a leitura imediatamente
         sintese.cancel();
         isLendo = false;
         btnVoz.innerText = "🔊 Ouvir Site";
         btnVoz.style.backgroundColor = "#2c3e50";
     } else {
-        const textoSite = document.querySelector(".conteudo-principal").innerText;
-        const mensagem = new SpeechSynthesisUtterance(textoSite);
+        // 1. Pega todos os parágrafos, listas e títulos do site
+        const elementos = document.querySelectorAll(".conteudo-principal h2, .conteudo-principal p, .conteudo-principal li");
         
-        mensagem.lang = "pt-BR";
+        // 2. Transforma em uma lista de textos limpos
+        pedacosDeTexto = Array.from(elementos)
+            .map(el => el.innerText)
+            .filter(texto => texto.trim() !== ""); // Ignora partes vazias
         
-        mensagem.onend = function() {
-            isLendo = false;
-            btnVoz.innerText = "🔊 Ouvir Site";
-            btnVoz.style.backgroundColor = "#2c3e50";
-        };
-
-        sintese.speak(mensagem);
+        indiceAtual = 0;
         isLendo = true;
         btnVoz.innerText = "🛑 Parar Leitura";
         btnVoz.style.backgroundColor = "#c0392b"; 
+        
+        // 3. Começa a ler o primeiro pedaço
+        lerProximoPedaco();
     }
 });
+
+function lerProximoPedaco() {
+    // Verifica se terminou ou se o usuário mandou parar
+    if (!isLendo || indiceAtual >= pedacosDeTexto.length) {
+        isLendo = false;
+        btnVoz.innerText = "🔊 Ouvir Site";
+        btnVoz.style.backgroundColor = "#2c3e50";
+        return;
+    }
+
+    const mensagem = new SpeechSynthesisUtterance(pedacosDeTexto[indiceAtual]);
+    mensagem.lang = "pt-BR";
+    mensagem.rate = 1.1; // Velocidade da voz
+
+    // Quando terminar este pedaço, chama a função para ler o próximo
+    mensagem.onend = function() {
+        indiceAtual++;
+        lerProximoPedaco();
+    };
+
+    // Prevenção de erros caso o navegador falhe na leitura de um pedaço
+    mensagem.onerror = function() {
+        indiceAtual++;
+        lerProximoPedaco();
+    };
+
+    sintese.speak(mensagem);
+}
