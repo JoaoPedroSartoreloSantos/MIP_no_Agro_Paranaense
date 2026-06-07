@@ -1,48 +1,31 @@
-// Aguarda todo o site carregar antes de ativar os botões
 document.addEventListener("DOMContentLoaded", function() {
     
-    // ==========================================
-    // ZOOM REAL DA PÁGINA
-    // ==========================================
-    let nivelZoom = 1; // 1 significa 100% (tamanho normal)
+    // Pega a tag <html> que é a raiz do site
+    const htmlRoot = document.documentElement; 
+    let tamanhoFonteBase = 16; // Tamanho original em pixels
 
     const btnAumentar = document.getElementById("btn-aumentar-zoom");
     const btnDiminuir = document.getElementById("btn-diminuir-zoom");
 
-    // Trava de segurança: Verifica se os botões realmente existem no HTML
     if (!btnAumentar || !btnDiminuir) {
-        console.error("ERRO: Os botões de zoom não foram encontrados pelo JavaScript!");
-        return; // Para o código aqui se der erro
+        console.error("Erro: Botões de zoom não encontrados no HTML.");
+        return;
     }
 
-    // Evento para Aumentar o Zoom
+    // Evento para Aumentar
     btnAumentar.addEventListener("click", function() {
-        console.log("Botão Zoom + foi clicado!"); // Emite um aviso no console
-        if (nivelZoom < 1.5) { 
-            nivelZoom += 0.1; 
-            aplicarZoom();
+        if (tamanhoFonteBase < 26) { 
+            tamanhoFonteBase += 2; // Aumenta 2px na raiz
+            htmlRoot.style.fontSize = tamanhoFonteBase + "px";
         }
     });
 
-    // Evento para Diminuir o Zoom
+    // Evento para Diminuir
     btnDiminuir.addEventListener("click", function() {
-        console.log("Botão Zoom - foi clicado!"); // Emite um aviso no console
-        if (nivelZoom > 0.8) { 
-            nivelZoom -= 0.1; 
-            aplicarZoom();
+        if (tamanhoFonteBase > 12) { 
+            tamanhoFonteBase -= 2; // Diminui 2px na raiz
+            htmlRoot.style.fontSize = tamanhoFonteBase + "px";
         }
     });
-
-    // Função que aplica o zoom visualmente
-    function aplicarZoom() {
-        console.log("Aplicando nível de zoom: " + nivelZoom);
-        
-        // Aplica o zoom nativo (Chrome, Edge, Safari)
-        document.body.style.zoom = nivelZoom;
-        
-        // Suporte extra para Firefox
-        document.body.style.MozTransform = `scale(${nivelZoom})`;
-        document.body.style.MozTransformOrigin = "top center";
-    }
 
 });
