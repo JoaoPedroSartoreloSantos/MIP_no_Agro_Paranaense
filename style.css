@@ -230,3 +230,24 @@ ul { margin-left: 2rem; margin-bottom: 1.5rem; }
 [vw] {
     z-index: 99999 !important;
 }
+/* --- ESTILO DO BOTÃO DE JOGO --- */
+.btn-jogo {
+    display: inline-block;
+    background-color: var(--verde-escuro); /* Usa o mesmo verde do seu cabeçalho */
+    color: #ffffff;
+    padding: 1rem 2.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none; /* Tira o sublinhado do link */
+    border-radius: 50px; /* Deixa o botão bem arredondado */
+    box-shadow: 0px 6px 15px rgba(0,0,0,0.3);
+    transition: transform 0.2s, background-color 0.2s;
+    border: 3px solid #ffffff; /* Bordinha branca para destacar no fundo */
+}
+
+/* Efeito quando o mouse passa por cima do botão */
+.btn-jogo:hover {
+    transform: scale(1.08); /* Dá um zoom no botão */
+    background-color: #ffd700; /* Fica dourado ao passar o mouse */
+    color: var(--preto);
+}
