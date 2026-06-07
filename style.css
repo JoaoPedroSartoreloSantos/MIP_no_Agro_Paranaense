@@ -160,21 +160,21 @@ ul { margin-left: 2rem; margin-bottom: 1.5rem; }
 
 /* --- ESTILO PARA O CONTAINER DA IMAGEM --- */
 .espaco-imagem {
-    border-radius: 0.5rem; /* Mantém os cantos arredondados */
     margin: 1.5rem 0;
-    overflow: hidden; /* REGRA DE OURO: Corta qualquer parte da foto que tentar vazar dos cantos! */
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.2); /* Sombra elegante */
-    background-color: transparent; /* Remove o fundo verde antigo */
-    /* Removemos o padding e a borda tracejada */
+    background-color: transparent; /* Garante que não tem verde no fundo */
+    display: flex;
+    justify-content: center; /* Centraliza a imagem perfeitamente */
 }
 
+/* --- ESTILO PARA A FOTO SE AJUSTAR SOZINHA --- */
 .foto-fluida {
-    width: 100%; 
-    height: auto; 
-    max-height: 450px; 
-    object-fit: cover; 
-    display: block; 
-
+    max-width: 100%; /* Impede que a foto vaze para fora da tela */
+    width: 100%; /* Faz a foto ocupar a largura toda do espaço */
+    height: auto; /* MÁGICA: A altura se ajusta sozinha, mantendo a proporção original da foto! */
+    display: block;
+    border-radius: 0.5rem; /* Arredonda as pontinhas da própria foto */
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2); /* Coloca a sombra direto na foto */
+}
 .espaco-imagem p {
     text-align: center;
     margin-bottom: 0;
