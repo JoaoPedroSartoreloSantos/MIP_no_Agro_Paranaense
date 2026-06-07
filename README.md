@@ -1,22 +1,45 @@
-# Simulador de Campo: O Guardião da Lavoura Paranaense 🌾🤖
-#agrinho
+# 🌾 Agrinho 2026 - Projeto: MIP no Agro Paranaense
 
-## 🎯 Objetivo do Tema Agrinho 2026
-O tema do Concurso Agrinho 2026 é **"Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente"**. Este projeto tem como propósito conscientizar estudantes e produtores sobre a viabilidade e a extrema importância do **Manejo Integrado de Pragas (MIP)** e do **Controle Biológico**. Através do equilíbrio e da tecnologia de ponta, provamos que o Paraná consegue manter recordes de produtividade agrícola resguardando a biodiversidade do nosso estado.
+Bem-vindo ao repositório do projeto **Agrinho 2026**! Este site foi desenvolvido para demonstrar a importância do **Manejo Integrado de Pragas (MIP)** na agricultura do Paraná, unindo tecnologia, sustentabilidade e conscientização.
+
+---
+
+## 🎯 Sobre o Projeto
+
+A agricultura paranaense é uma das mais fortes do mundo. O objetivo deste projeto é mostrar como a tecnologia e as práticas conscientes ajudam os agricultores a produzir mais, agredindo menos o meio ambiente. 
+
+O site conta com um design imersivo, focado em legibilidade e acessibilidade, além de possuir uma integração direta com um minigame educativo sobre a proteção das lavouras.
+
+## ✨ Funcionalidades do Site
+
+* **Design Imersivo:** Fundo dinâmico (`fundo-agro.png`) cobrindo toda a tela com caixas de texto brancas para garantir uma leitura limpa.
+* **Acessibilidade Integrada:** Botões de Zoom e Libras integrados via JavaScript diretamente no HTML para facilitar a leitura de todos os usuários.
+* **Layout Responsivo:** Imagens dinâmicas que se ajustam automaticamente ao tamanho da tela, envoltas por bordas personalizadas.
+* **Minigame Educativo:** Botão interativo que redireciona para o jogo "Defesa da Lavoura", programado do zero.
+
+## 🎮 O Minigame: Defesa da Lavoura
+
+Desenvolvido utilizando a biblioteca **p5.js**, o jogo coloca o usuário na pele de um agricultor tecnológico.
+* **Dia:** Plante sementes e cure plantas infectadas através de um minigame de desvio usando as setinhas do teclado.
+* **Noite:** Proteja a sua lavoura de ataques usando o feixe de luz da sua lanterna ao clicar nos animais.
+* **Objetivo:** Sobreviva aos dias, mantenha suas plantas vivas e consiga o melhor tempo possível!
 
 ## 🛠️ Tecnologias Utilizadas
-* **HTML5 Semântico:** Estruturação lógica e acessível do conteúdo.
-* **CSS3 Customizado:** Design responsivo focado em uma experiência futurista escura (Cockpit de Trator/Drone), utilizando variáveis, Flexbox e Media Queries.
-* **JavaScript Puro (ES6):** Manipulação dinâmica de elementos da árvore DOM, controle de estado de variáveis, lógica gamificada e acessibilidade.
 
-## 🎨 Produção de Mídias e Autoralidade
-* **Textos:** 100% autorais baseados nos manuais de sustentabilidade do SENAR-PR e IDR-Paraná.
-* **Ícones e Gráficos:** Customizados e estilizados via código e ferramentas digitais auxiliares (**Canva / Paint**).
+* **HTML5:** Estruturação semântica do conteúdo.
+* **CSS3:** Estilização, variáveis de cores, efeitos de hover, sombras e design responsivo (Flexbox).
+* **JavaScript (Vanilla):** Lógica de acessibilidade (Zoom).
+* **p5.js:** Criação e renderização do minigame.
+* **Git & GitHub:** Versionamento de código.
+* **VS Code:** Editor de código principal.
 
-## 🚀 Instruções de Uso
-1. Abra o arquivo `index.html` em qualquer navegador moderno.
-2. Na primeira seção, registre seu nome no campo de identificação do Agrônomo.
-3. Leia o cenário de crise gerado em tempo real pelo drone de monitoramento em Cascavel/PR.
-4. Tome sua decisão clicando em uma das duas opções operacionais.
-5. Analise as barras dinâmicas de impacto financeiro e sustentabilidade ambiental calculadas pelo algoritmo do sistema.
-6. Use os botões `A+` e `A-` no menu superior caso necessite ajustar a legibilidade dos textos.
+## 🚀 Como Executar o Projeto
+
+1. Clone este repositório para a sua máquina local.
+2. Abra a pasta do projeto no **Visual Studio Code**.
+3. Certifique-se de ter a extensão **Live Server** instalada.
+4. Clique com o botão direito no arquivo `index.html` e selecione `Open with Live Server`.
+5. Para jogar o minigame isoladamente, clique no botão "🎮 Jogar: Defesa da Lavoura" no site!
+
+---
+*Projeto desenvolvido para o programa Agrinho 2026.*
