@@ -1,5 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Pega a raiz do site
+            const htmlRoot = document.documentElement; 
+            let tamanhoFonteBase = 16; 
+
+            // Pega os botões
+            const btnAumentar = document.getElementById("btn-aumentar-zoom");
+            const btnDiminuir = document.getElementById("btn-diminuir-zoom");
+
+            // Evento para Aumentar
+            btnAumentar.addEventListener("click", function() {
+                if (tamanhoFonteBase < 26) { 
+                    tamanhoFonteBase += 2; 
+                    htmlRoot.style.fontSize = tamanhoFonteBase + "px";
+                }
+            });
+
+            // Evento para Diminuir
+            btnDiminuir.addEventListener("click", function() {
+                if (tamanhoFonteBase > 12) { 
+                    tamanhoFonteBase -= 2; 
+                    htmlRoot.style.fontSize = tamanhoFonteBase + "px";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
