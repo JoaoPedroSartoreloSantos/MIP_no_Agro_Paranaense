@@ -158,17 +158,22 @@ ul { margin-left: 2rem; margin-bottom: 1.5rem; }
     margin: 3rem 0;
 }
 
-/* --- NOVO: ESTILO PARA OS ESPAÇOS DE IMAGEM --- */
+/* --- ESTILO PARA O CONTAINER DA IMAGEM --- */
 .espaco-imagem {
-    background-color: var(--verde-imagem);
-    border: 2px dashed var(--verde-principal);
-    border-radius: 0.5rem;
-    padding: 3rem 1.5rem;
-    text-align: center;
+    border-radius: 0.5rem; /* Mantém os cantos arredondados */
     margin: 1.5rem 0;
-    color: var(--verde-escuro);
-    font-weight: bold;
+    overflow: hidden; /* REGRA DE OURO: Corta qualquer parte da foto que tentar vazar dos cantos! */
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2); /* Sombra elegante */
+    background-color: transparent; /* Remove o fundo verde antigo */
+    /* Removemos o padding e a borda tracejada */
 }
+
+.foto-fluida {
+    width: 100%; 
+    height: auto; 
+    max-height: 450px; 
+    object-fit: cover; 
+    display: block; 
 
 .espaco-imagem p {
     text-align: center;
