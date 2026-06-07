@@ -39,8 +39,12 @@ body {
 }
 
 .titulo-container h1 { font-size: 1.8rem; color: var(--verde-claro); }
-.titulo-container h2 { font-size: 1.1rem; font-weight: normal; margin-top: 0.2rem; }
-
+.titulo-container h2 { 
+    font-size: 1.1rem; 
+    font-weight: normal; 
+    margin-top: 0.2rem; 
+    color: #09a07a; /* Esta é a cor Dourada/Amarela. Você pode trocar se quiser! */
+}
 .controles-acessibilidade {
     display: flex;
     gap: 0.5rem;
@@ -159,7 +163,7 @@ ul { margin-left: 2rem; margin-bottom: 1.5rem; }
     font-size: 1.1rem;
 }
 
-/* --- NOVO: ESTILO DO BOTÃO VERMELHO DO JOGO --- */
+
 .secao-jogo {
     text-align: center;
 }
