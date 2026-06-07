@@ -23,7 +23,17 @@ html {
 }
 
 body {
-    background-color: var(--verde-fundo);
+    background-image: url("Gemini_Generated_Image_97daf97daf97daf9.ppg"); 
+    
+    /* Faz a imagem cobrir a tela inteira */
+    background-size: cover; 
+    
+    /* Deixa a imagem parada no fundo enquanto rola o texto da página */
+    background-attachment: fixed; 
+    
+    /* Centraliza a imagem */
+    background-position: center; 
+    
     color: var(--preto);
 }
 
