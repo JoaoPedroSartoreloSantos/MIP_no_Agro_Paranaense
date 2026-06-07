@@ -1,34 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Pega a raiz do site
-            const htmlRoot = document.documentElement; 
-            let tamanhoFonteBase = 16; 
-
-            // Pega os botões
-            const btnAumentar = document.getElementById("btn-aumentar-zoom");
-            const btnDiminuir = document.getElementById("btn-diminuir-zoom");
-
-            // Evento para Aumentar
-            btnAumentar.addEventListener("click", function() {
-                if (tamanhoFonteBase < 26) { 
-                    tamanhoFonteBase += 2; 
-                    htmlRoot.style.fontSize = tamanhoFonteBase + "px";
-                }
-            });
-
-            // Evento para Diminuir
-            btnDiminuir.addEventListener("click", function() {
-                if (tamanhoFonteBase > 12) { 
-                    tamanhoFonteBase -= 2; 
-                    htmlRoot.style.fontSize = tamanhoFonteBase + "px";
-                }
-            });
-        });
-    </script>
-</body>
-</html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -143,7 +114,7 @@
             <h2>Mapa do Paraná</h2>
             <p>Explore o mapa do nosso estado. É nestas terras que a união entre tecnologia e natureza acontece todos os dias.</p>
             <div class="container-mapa-real">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683058.0772658864!2d-54.81056589999999!3d-24.622152600000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ece4857b2824cd%3A0xcb13e0c01a9167dd!2sParan%C3%A1!5e0!3m2!1spt-BR!2sbr!4v1716940000000!5m2!1spt-BR!2sbr" width="100%" height="450" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658518.175510619!2d-54.6750058564251!3d-24.582846874845564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ea4840ab3d735d%3A0x8321d2b8b9a52701!2zUGFyYW7DoQ!5e0!3m2!1spt-BR!2sbr!4v1717739500000!5m2!1spt-BR!2sbr" width="100%" height="450" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </section>
 
@@ -152,16 +123,41 @@
         <section id="arena-jogo" class="secao-jogo">
             <h2>Proteja a Plantação!</h2>
             <p class="txt-centralizado">Pronto para colocar as mãos na massa e ver como funciona a rotina de um agricultor tecnológico e consciente?</p>
-           
-<div style="text-align: center; margin: 2rem 0;">
-    <a href="https://editor.p5js.org/joao.sartorelo.santos/present/q77TxCV3l" target="_blank" class="btn-jogo">
-        🎮 Jogar: Protegendo a Plantação
-    </a>
-</div>
             
+            <div style="text-align: center; margin: 2rem 0;">
+                <a href="https://editor.p5js.org/joao.sartorelo.santos/present/q77TxCV3l" target="_blank" class="btn-jogo">
+                    🎮 Jogar: Protegendo a Plantação
+                </a>
+            </div>
+        </section>
 
     </main>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const htmlRoot = document.documentElement; 
+            let tamanhoFonteBase = 16; 
+
+            const btnAumentar = document.getElementById("btn-aumentar-zoom");
+            const btnDiminuir = document.getElementById("btn-diminuir-zoom");
+
+            if(btnAumentar && btnDiminuir) {
+                btnAumentar.addEventListener("click", function() {
+                    if (tamanhoFonteBase < 26) { 
+                        tamanhoFonteBase += 2; 
+                        htmlRoot.style.fontSize = tamanhoFonteBase + "px";
+                    }
+                });
+
+                btnDiminuir.addEventListener("click", function() {
+                    if (tamanhoFonteBase > 12) { 
+                        tamanhoFonteBase -= 2; 
+                        htmlRoot.style.fontSize = tamanhoFonteBase + "px";
+                    }
+                });
+            }
+        });
+    </script>
 
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
