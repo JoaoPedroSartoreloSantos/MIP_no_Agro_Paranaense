@@ -19,7 +19,7 @@ O site conta com um design imersivo, focado em legibilidade e acessibilidade, al
 
 ## 🎮 O Minigame: Defesa da Lavoura
 
-Desenvolvido utilizando a biblioteca **p5.js**, o jogo coloca o usuário na pele de um agricultor tecnológico.
+Desenvolvido em javascript utilizando a biblioteca **p5.js**, o jogo coloca o usuário na pele de um agricultor tecnológico.
 * **Dia:** Plante sementes e cure plantas infectadas através de um minigame de desvio usando as setinhas do teclado.
 * **Noite:** Proteja a sua lavoura de ataques usando o feixe de luz da sua lanterna ao clicar nos animais.
 * **Objetivo:** Sobreviva aos dias, mantenha suas plantas vivas e consiga o melhor tempo possível!
