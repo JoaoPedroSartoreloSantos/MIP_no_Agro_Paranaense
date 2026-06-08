@@ -76,7 +76,7 @@ body {
     transform: scale(0.95);
 }
 
-/* BARRA DE NAVEGAÇÃO */
+
 .barra-navegacao {
     background-color: var(--verde-principal);
     padding: 1rem;
@@ -116,7 +116,7 @@ body {
 }
 
 .conteudo-principal {
-    background-color: #ffffff 
+    background-color: #ffffff !important;
     max-width: 65rem;
     margin: 2rem auto;
     padding: 3rem;
