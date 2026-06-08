@@ -48,7 +48,7 @@ body {
     font-size: 1.1rem; 
     font-weight: normal; 
     margin-top: 0.2rem; 
-    color: #09a07a; /* Esta é a cor Dourada/Amarela. Você pode trocar se quiser! */
+    color: #09a07a;
 }
 .controles-acessibilidade {
     display: flex;
@@ -116,12 +116,12 @@ body {
 }
 
 .conteudo-principal {
-    background-color: #ffffff !important; /* Força o fundo a ser totalmente branco */
+    background-color: #ffffff 
     max-width: 65rem;
     margin: 2rem auto;
     padding: 3rem;
     border-radius: 0.5rem;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.3); /* Sombra um pouco mais forte para destacar do fundo */
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.3); 
 }
 
 section { margin-bottom: 2rem; padding-top: 1rem; }
@@ -149,7 +149,6 @@ ul { margin-left: 2rem; margin-bottom: 1.5rem; }
     margin: 3rem 0;
 }
 
-/* --- CONTAINER DA IMAGEM  --- */
 .espaco-imagem {
     width: 100%; 
     max-width: 100%; 
@@ -218,51 +217,49 @@ ul { margin-left: 2rem; margin-bottom: 1.5rem; }
     transform: translateY(1px);
 }
 
-/* Garante o VLibras por cima do menu */
+
 [vw] {
     z-index: 99999 !important;
 }
-/* --- ESTILO DO BOTÃO DE JOGO --- */
+
 .btn-jogo {
     display: inline-block;
-    background-color: var(--verde-escuro); /* Usa o mesmo verde do seu cabeçalho */
+    background-color: var(--verde-escuro); 
     color: #ffffff;
     padding: 1rem 2.5rem;
     font-size: 1.5rem;
     font-weight: bold;
-    text-decoration: none; /* Tira o sublinhado do link */
-    border-radius: 50px; /* Deixa o botão bem arredondado */
+    text-decoration: none; 
+    border-radius: 50px; 
     box-shadow: 0px 6px 15px rgba(0,0,0,0.3);
     transition: transform 0.2s, background-color 0.2s;
-    border: 3px solid #ffffff; /* Bordinha branca para destacar no fundo */
+    border: 3px solid #ffffff; 
 }
 
-/* Efeito quando o mouse passa por cima do botão */
+
 .btn-jogo:hover {
-    transform: scale(1.08); /* Dá um zoom no botão */
-    background-color: #ffd700; /* Fica dourado ao passar o mouse */
+    transform: scale(1.08);
+    background-color: #ffd700; 
     color: var(--preto);
 }
-/* ========================================== */
-/* BARRA DE NAVEGAÇÃO E MENU           */
-/* ========================================== */
+
 
 .barra-navegacao {
-    /* Use a variável do seu verde, ou a cor hexadecimal caso prefira */
+    
     background-color: var(--verde-escuro, #2E7D32); 
     padding: 0.8rem 1rem;
-    position: sticky; /* Faz o menu grudar no topo da tela ao rolar para baixo */
+    position: sticky; 
     top: 0;
-    z-index: 1000; /* Garante que o menu fique sempre por cima das fotos e textos */
+    z-index: 1000; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .links-menu {
-    list-style: none; /* Tira as bolinhas padrão das listas */
-    display: flex; /* Coloca os itens um do lado do outro */
-    flex-wrap: wrap; /* Se a tela for pequena, joga os botões para a linha de baixo automaticamente */
-    justify-content: center; /* Centraliza tudo perfeitamente */
-    gap: 0.5rem 1.5rem; /* Espaçamento entre os botões (vertical e horizontal) */
+    list-style: none; 
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 0.5rem 1.5rem; 
     margin: 0;
     padding: 0;
 }
@@ -270,32 +267,30 @@ ul { margin-left: 2rem; margin-bottom: 1.5rem; }
 .links-menu a {
     display: inline-block;
     color: #ffffff;
-    text-decoration: none; /* Tira o sublinhado azul padrão dos links */
+    text-decoration: none; 
     font-weight: bold;
     font-size: 1rem;
     padding: 0.5rem 1rem;
-    border-radius: 8px; /* Bordas arredondadas e amigáveis */
-    transition: all 0.3s ease; /* Deixa a animação suave */
+    border-radius: 8px; 
+    transition: all 0.3s ease; 
 }
 
-/* Efeito Hover (quando o mouse passa por cima) */
+
 .links-menu a:hover {
-    background-color: #ffd700; /* Fica dourado ao passar o mouse */
-    color: #2b2b2b; /* Texto escuro para dar leitura no fundo claro */
-    transform: translateY(-2px); /* O botão dá um leve pulinho para cima */
+    background-color: #ffd700; 
+    color: #2b2b2b; 
+    transform: translateY(-2px); 
 }
 
-/* ========================================== */
-/* RESPONSIVIDADE (CELULARES)          */
-/* ========================================== */
+
 @media (max-width: 768px) {
     .links-menu {
-        gap: 0.5rem; /* Deixa os botões um pouco mais juntos no celular */
+        gap: 0.5rem; 
     }
     
     .links-menu a {
-        font-size: 0.85rem; /* Reduz um pouquinho a letra para caber mais botões */
+        font-size: 0.85rem; 
         padding: 0.4rem 0.6rem;
-        border: 1px solid rgba(255, 255, 255, 0.2); /* Bordinha leve para separar os botões no celular */
+        border: 1px solid rgba(255, 255, 255, 0.2); 
     }
 }
