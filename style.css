@@ -219,7 +219,7 @@ ul { margin-left: 2rem; margin-bottom: 1.5rem; }
 
 
 [vw] {
-    z-index: 99999 !important;
+    z-index: 99999;
 }
 
 .btn-jogo {
