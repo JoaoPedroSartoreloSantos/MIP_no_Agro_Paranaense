@@ -3,7 +3,7 @@
     --verde-principal: #5b9a4d;
     --verde-claro: #84d670;
     --verde-fundo: #e7ffd1;
-    --verde-imagem: #d5f5c5; /* Tom verde exclusivo para os fundos das imagens */
+    --verde-imagem: #d5f5c5; 
     --preto: #000000;
     --branco: #ffffff;
     --vermelho-jogo: #e74c3c;
@@ -24,17 +24,9 @@ html {
 
 body {
     background-image: url("img/fundo-agro.png"); 
-    
-    /* Imagem cobre 100% da tela */
     background-size: cover; 
-    
-    /* Deixa a imagem pregada no fundo enquanto rola a página */
-    background-attachment: fixed; 
-    
-    /* Centraliza na tela */
+    background-attachment: fixed;
     background-position: center center; 
-    
-    /* Garante que a imagem não vai se repetir */
     background-repeat: no-repeat;
     
     color: var(--preto);
