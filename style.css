@@ -1,8 +1,7 @@
-
 :root {
     --verde-escuro: #2E7D32;
     --verde-claro: #4CAF50;
-    --verde-fundo-cabecalho: #e8f5e9; 
+    --verde-fundo-cabecalho: #e8f5e9; /* NOVO: Verde bem clarinho para o fundo */
     --dourado: #ffd700;
     --texto-escuro: #2b2b2b;
     --branco: #ffffff;
@@ -21,24 +20,25 @@ body {
 
 /* Cabeçalho com Verde Clarinho */
 .cabecalho-principal {
-    background-color: var(--verde-fundo-cabecalho); 
+    background-color: var(--verde-fundo-cabecalho); /* Cor verde clarinha aplicada aqui */
     padding: 1.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    border-bottom: 2px solid var(--verde-claro); 
+    border-bottom: 2px solid var(--verde-claro); /* Linha sutil para dividir o topo */
+}
 
 .titulo-container h1 {
     margin: 0;
-    color: var(--verde-escuro); 
+    color: var(--verde-escuro); /* Texto escuro para contrastar com o fundo claro */
     font-size: 2.5rem;
 }
 
 .titulo-container h2 {
     margin: 0.5rem 0 0 0;
-    color: var(--verde-claro); 
+    color: var(--verde-claro); /* Subtítulo em verde médio */
     font-size: 1.2rem;
 }
 
@@ -101,7 +101,7 @@ body {
     transform: translateY(-2px);
 }
 
-
+/* Botão Mobile Estilizado */
 .btn-mobile {
     display: none; 
     background-color: transparent;
@@ -122,7 +122,7 @@ body {
     transform: translateY(-2px);
 }
 
-
+/* Caixa Branca Principal Protegida */
 .conteudo-principal {
     background-color: var(--branco) !important;
     color: var(--texto-escuro) !important;
