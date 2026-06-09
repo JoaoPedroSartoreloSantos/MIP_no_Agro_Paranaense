@@ -32,6 +32,8 @@ Desenvolvido em javascript utilizando a biblioteca **p5.js**, o jogo coloca o us
 * **p5.js:** Criação e renderização do minigame.
 * **Git & GitHub:** Versionamento de código.
 * **VS Code:** Editor de código principal.
+* **Google Gemini:** Para criar imagens a partir de prompts.
+
 
 ## 🚀 Como Executar o Projeto
 
