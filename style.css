@@ -1,13 +1,14 @@
 :root {
     --verde-escuro: #2E7D32;
     --verde-claro: #4CAF50;
+    --verde-fundo-cabecalho: #e8f5e9; /* NOVO: Verde bem clarinho para o fundo */
     --dourado: #ffd700;
     --texto-escuro: #2b2b2b;
     --branco: #ffffff;
 }
 
 body {
-    background-image: url('img/fundo-agro.png') !important; /* Caminho corrigido para a pasta img */
+    background-image: url('img/fundo-agro.png') !important; 
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -17,28 +18,28 @@ body {
     color: var(--texto-escuro);
 }
 
-/* Cabeçalho Ajustado para Fundo Transparente */
+/* Cabeçalho com Verde Clarinho */
 .cabecalho-principal {
-    background-color: transparent; /* Removido o fundo branco */
-    padding: 2rem;
+    background-color: var(--verde-fundo-cabecalho); /* Cor verde clarinha aplicada aqui */
+    padding: 1.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    border-bottom: 2px solid var(--verde-claro); /* Linha sutil para dividir o topo */
 }
 
 .titulo-container h1 {
     margin: 0;
-    color: var(--branco); /* Texto branco para destacar no fundo escuro da imagem */
+    color: var(--verde-escuro); /* Texto escuro para contrastar com o fundo claro */
     font-size: 2.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para garantir total leitura */
 }
 
 .titulo-container h2 {
     margin: 0.5rem 0 0 0;
-    color: var(--dourado); /* Dourado para dar um contraste elegante */
+    color: var(--verde-claro); /* Subtítulo em verde médio */
     font-size: 1.2rem;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 .controles-acessibilidade {
@@ -55,7 +56,7 @@ body {
     cursor: pointer;
     font-weight: bold;
     transition: 0.3s;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .btn-ctrl:hover {
@@ -100,7 +101,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Botão Mobile Estilizado igual aos links do Computador */
+/* Botão Mobile Estilizado */
 .btn-mobile {
     display: none; 
     background-color: transparent;
@@ -226,7 +227,6 @@ body {
         gap: 0.5rem;
     }
 
-    /* Classe ativada pelo JS para exibir o menu */
     .links-menu.ativo {
         display: flex; 
     }
