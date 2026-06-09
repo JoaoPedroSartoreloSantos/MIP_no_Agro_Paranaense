@@ -27,7 +27,7 @@
         </div>
     </header>
 
-   <nav class="barra-navegacao">
+    <nav class="barra-navegacao">
         <button id="btn-menu-mobile" class="btn-mobile">
             <span id="icone-menu">☰</span>
             <span id="texto-menu">Abrir menu</span>
@@ -65,7 +65,7 @@
         </section>
 
         <section id="pergunta2">
-            <h2>Adubos, fertilizantes e alternativas naturais: Como substituir os agrotóxicos?</h2>
+            <h2>Adubos, fertilizantes e alternatives naturais: Como substituir os agrotóxicos?</h2>
             <p>A grande revolução que está acontecendo nas fazendas do Paraná neste exato momento atende pelo nome de <strong>Bioinsumos</strong>. Durante muito tempo, dependemos de produtos químicos agressivos, mas os cientistas descobriram como usar a própria natureza a nosso favor.</p>
             <ul>
                 <li><strong>Inoculantes Bacterianos:</strong> Em vez de jogar toneladas de adubo químico no solo, os produtores misturam as sementes com bactérias naturais "do bem". Quando a planta cresce, essas bactérias puxam o nitrogênio que está solto no ar e entregam diretamente na raiz da planta.</li>
@@ -141,12 +141,13 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const htmlRoot = document.documentElement; 
-            let tamanhoFonteBase = 16; 
+            let tamanhoFonteBase = 16;
 
             const btnAumentar = document.getElementById("btn-aumentar-zoom");
             const btnDiminuir = document.getElementById("btn-diminuir-zoom");
 
-            if(btnAumentar && btnDiminuir) {
+            // Lógica do Zoom
+            if (btnAumentar && btnDiminuir) {
                 btnAumentar.addEventListener("click", function() {
                     if (tamanhoFonteBase < 26) { 
                         tamanhoFonteBase += 2; 
@@ -156,40 +157,37 @@
 
                 btnDiminuir.addEventListener("click", function() {
                     if (tamanhoFonteBase > 12) { 
-                        tamanhoFonteBase -= 2; 
+                        tamanhoFonteBase -= 2;  
                         htmlRoot.style.fontSize = tamanhoFonteBase + "px";
                     }
                 });
             }
-        });
-   
-        const btnMenuMobile = document.getElementById("btn-menu-mobile");
-        const menuLinks = document.getElementById("menu-links");
-        const textoMenu = document.getElementById("texto-menu");
-        const iconeMenu = document.getElementById("icone-menu");
+            
+            // Lógica do Menu Hambúrguer
+            const btnMenuMobile = document.getElementById("btn-menu-mobile");
+            const menuLinks = document.getElementById("menu-links");
+            const textoMenu = document.getElementById("texto-menu");
+            const iconeMenu = document.getElementById("icone-menu");
 
-        if (btnMenuMobile && menuLinks) {
-            btnMenuMobile.addEventListener("click", function() {
-                // Adiciona ou tira a classe 'ativo' que mostra/esconde o menu
-                menuLinks.classList.toggle("ativo");
-                
-                // Verifica se o menu está aberto ou fechado para mudar o texto
-                if (menuLinks.classList.contains("ativo")) {
-                    textoMenu.textContent = "Fechar menu";
-                    iconeMenu.textContent = "✕"; // Troca os tracinhos por um X
-                } else {
-                    textoMenu.textContent = "Abrir menu";
-                    iconeMenu.textContent = "☰"; // Volta para os tracinhos
-                }
-            });
-        }
-    });
-</script>
+            if (btnMenuMobile && menuLinks) {
+                btnMenuMobile.addEventListener("click", function() {
+                    menuLinks.classList.toggle("ativo");
+                    
+                    if (menuLinks.classList.contains("ativo")) {
+                        textoMenu.textContent = "Fechar menu";
+                        iconeMenu.textContent = "✕"; 
+                    } else {
+                        textoMenu.textContent = "Abrir menu";
+                        iconeMenu.textContent = "☰"; 
+                    }
+                });
+            }
+        });
+    </script>
 
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
